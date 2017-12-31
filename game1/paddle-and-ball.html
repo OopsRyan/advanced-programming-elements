@@ -26,7 +26,7 @@
     var Paddle = function() {
     	// general name : o(object)
     	var o = {
-    		speed: 15,
+    		speed: 10,
     		x: 100,
     		y: 320,
     		width: 200,
@@ -72,7 +72,7 @@
 
     	// move paddle
     	window.addEventListener('keyup', (event) => {
-    		
+
     		game.keydowns[event.key] = false
     	})
 
@@ -90,16 +90,16 @@
 
 
     	setInterval(function() {
-    		// log(game)
+
     		var actions = Object.keys(game.actions)
 
     		for (var i = actions.length - 1; i >= 0; i--) {
     			     				
     			var key = actions[i]
-
-    			if (game.keydowns[i]) {
+  
+    			if (game.keydowns[key]) {
+    				// when the key is pressed, call its action
     				game.actions[key]()
-    				log(game)
     			}
     		}
 
