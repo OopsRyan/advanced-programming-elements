@@ -9,11 +9,11 @@
 6. When defining a json object or dictionaries, each line, especially the last line, should end with a ',' for consistency.
 7. ES6 claims each line in JS cannot contain ';' in the end.
 8. Anonymous functions should be defined exactly in the format like this, 
-
 	
 	var a = function() {
 
 	} 
 9. Enter a space char after keywords `for` and `if`
 10. When the same logic appears many time and runs various functions, it is essential to find out the pattern, such as the key event binding. Each pressed key means different methods to be run. The most effective way is to store the keys in a dictionary and bind functions for these keys. In the Game 1, I store the keys in a dictionary 'actions', and bind a function for each key (registration in the code).
-![Game1](https://github.com/OopsRyan/advanced-programming-styles/blob/master/game1/game1_demo.gif){:height='200px' width='200px'}
+
+<img src="https://github.com/OopsRyan/advanced-programming-styles/blob/master/game1/game1_demo.gif" width = "200" height = "200"/>
