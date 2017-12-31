@@ -15,3 +15,5 @@
 
 	} 
 9. Enter a space char in `for` and `if`
+
+![Game1](https://github.com/OopsRyan/advanced-programming-styles/blob/master/game1/game1_demo.gif?raw=true)
