@@ -24,8 +24,10 @@
     }
 
     var Paddle = function() {
-    	// general name : o(object)
+    	var image = imageFromPath('paddle.png')
+
     	var o = {
+    		image: image,
     		speed: 10,
     		x: 100,
     		y: 320,
@@ -44,33 +46,75 @@
     	return o
     }
 
-    var __main = function() {
+    var Ball = function() {
+    	var image = imageFromPath('ball.png')
+    	var canvas = document.querySelector('#id-canvas')
 
-    	var canvas = document.querySelector("#id-canvas")
+    	var o = {
+    		image: image,
+    		xSpeed: 10,
+    		ySpeed: 10,
+    		x:100,
+    		y:320,
+    		width: 30,
+    		height: 30,
+    		fired: false,
+    		max_width: canvas.width,
+    		max_height: canvas.height,
+    	}
 
-    	var context = canvas.getContext('2d')
+    	o.fire = function() {
+    		o.fired = true
+    	}
 
-    	var paddle = Paddle()
+    	o.move = function() {
 
-    	// draw paddle
-    	var paddle_img = imageFromPath('paddle.png')
+    		if (o.fired) {
 
-    	paddle_img.onload = function() {
-    		context.drawImage(paddle_img, paddle.x, paddle.y, paddle.width, paddle.height)
-    	}	  	
-  		
+	    		if (o.x + o.width >= o.max_width || o.x <= 0) {
+	    			o.xSpeed *= -1
+	    		} else if (o.y <= 0 || o.y + o.height >= o.max_height) {
+	    			o.ySpeed *= -1
+	    		}
+
+	    		o.x += o.xSpeed
+	    		o.y += o.ySpeed
+    		}
+    	}
+
+    	o.collide = function(paddle) {
+    		
+    		if (o.y + o.height >= paddle.y && (o.x >= paddle.x && o.x <= paddle.x + paddle.width))
+    			return true
+
+    		return false
+    	}
+
+    	return o
+    }
+
+    var Game = function() {
     	var game = {
     		actions: {},
     		keydowns: {},
     	}
 
-    	// move paddle
-    	window.addEventListener('keydown', (event) => {
+    	var canvas = document.querySelector("#id-canvas")
+    	game.canvas = canvas
+
+    	var context = canvas.getContext('2d')
+    	game.context = context
+
+    	game.drawImage = function(o) {
+    		game.context.drawImage(o.image, o.x, o.y, o.width, o.height)
+    	}	  	
+  		
+  		// events
+  		window.addEventListener('keydown', (event) => {
 
     		game.keydowns[event.key] = true
     	})
 
-    	// move paddle
     	window.addEventListener('keyup', (event) => {
 
     		game.keydowns[event.key] = false
@@ -79,15 +123,6 @@
     	game.registration = function(key, callback) {
     		game.actions[key] = callback
     	}
-
-    	game.registration('a', function() {
-    		paddle.moveLeft()
-    	})
-
-		game.registration('d', function() {
-    		paddle.moveRight()
-    	})    	
-
 
     	setInterval(function() {
 
@@ -103,15 +138,50 @@
     			}
     		}
 
+    		game.update()
     		context.clearRect(0, 0, canvas.width, canvas.height)
-    		context.drawImage(paddle_img, paddle.x, paddle.y, paddle.width, paddle.height)
+			game.draw()
 
     	}, 1000/30)
 
+    	return game
+    }
 
+    var __main = function() {
+    	var game = Game()
+
+		var paddle = Paddle()
+    	var ball = Ball()
+
+    	game.registration('a', function() {
+    		paddle.moveLeft()
+    	})
+
+		game.registration('d', function() {
+    		paddle.moveRight()
+    	})    	
+
+    	game.registration('b', function() {
+    		ball.fire()
+    	})
+
+    	game.update = function() {
+    		ball.move()
+
+    		if (ball.collide(paddle)) {
+    			ball.ySpeed *= -1
+    		}
+    	}
+		
+		// draw the paddle and the ball
+		game.draw = function() {
+			game.drawImage(paddle)
+			game.drawImage(ball)
+		}
     }
 
     __main()
+    
 </script>
 </body>
 
