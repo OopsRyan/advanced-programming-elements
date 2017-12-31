@@ -4,16 +4,16 @@
 1. The information on web development could be searched with the keyword "MDN" in the very beginning.
 2. The program should be separated into a number of functions, and have only one entrance, main function, which should be named in a distinct format, like `__main()`.
 3. The function designed for actions should be named with verbs in the very beginning. If the function returns an object, its name should begin with the name of object.
-4. The objects must not reveal any detail in the main function. The details should be warppered by methods.
-5. In js, the object's effect scope should be defined in 'var' rather than 'let const'.
+4. The objects must not reveal any detail in the main function. The details should be wrapped by methods.
+5. In JS, the object's effect scope should be defined in 'var' rather than 'let const'.
 6. When defining a json object or dictionaries, each line, especially the last line, should end with a ',' for consistency.
-7. ES6 claims each line in js cannot contain ';' in the end.
+7. ES6 claims each line in JS cannot contain ';' in the end.
 8. Anonymous functions should be defined exactly in the format like this, 
 
 	
 	var a = function() {
 
 	} 
-9. Enter a space char in `for` and `if`
-
+9. Enter a space char after keywords `for` and `if`
+10. When the same logic appears many time and runs various functions, it is essential to find out the pattern, such as the key event binding. Each pressed key means different methods to be run. The most effective way is to store the keys in a dictionary and bind functions for these keys. In the Game 1, I store the keys in a dictionary 'actions', and bind a function for each key (registration in the code).
 ![Game1](https://github.com/OopsRyan/advanced-programming-styles/blob/master/game1/game1_demo.gif?raw=true)
