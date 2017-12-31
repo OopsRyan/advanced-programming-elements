@@ -16,4 +16,4 @@
 9. Enter a space char after keywords `for` and `if`
 10. When the same logic appears many time and runs various functions, it is essential to find out the pattern, such as the key event binding. Each pressed key means different methods to be run. The most effective way is to store the keys in a dictionary and bind functions for these keys. In the Game 1, I store the keys in a dictionary 'actions', and bind a function for each key (registration in the code).
 
-<img src="https://github.com/OopsRyan/advanced-programming-styles/blob/master/game1/game1_demo.gif" width = "200" height = "200"/>
+<img src="https://github.com/OopsRyan/advanced-programming-styles/blob/master/game1/game1_demo.gif" width="200" height="200"/>
