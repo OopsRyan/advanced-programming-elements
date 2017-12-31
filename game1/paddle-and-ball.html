@@ -14,7 +14,104 @@
 <body>
     <canvas id="id-canvas" width="500" height="400"></canvas>
 <script>
-    var 
+	// wrap console.log for convenience
+    var log = console.log.bind(console)
+
+    var imageFromPath = function(path){
+    	var img = new Image()
+    	img.src = path
+    	return img
+    }
+
+    var Paddle = function() {
+    	// general name : o(object)
+    	var o = {
+    		speed: 15,
+    		x: 100,
+    		y: 320,
+    		width: 200,
+    		height: 30,
+    	}
+
+    	o.moveLeft = function() {
+    		o.x -= o.speed
+    	}
+
+    	o.moveRight = function() {
+    		o.x += o.speed
+    	}
+
+    	return o
+    }
+
+    var __main = function() {
+
+    	var canvas = document.querySelector("#id-canvas")
+
+    	var context = canvas.getContext('2d')
+
+    	var paddle = Paddle()
+
+    	// draw paddle
+    	var paddle_img = imageFromPath('paddle.png')
+
+    	paddle_img.onload = function() {
+    		context.drawImage(paddle_img, paddle.x, paddle.y, paddle.width, paddle.height)
+    	}	  	
+  		
+    	var game = {
+    		actions: {},
+    		keydowns: {},
+    	}
+
+    	// move paddle
+    	window.addEventListener('keydown', (event) => {
+
+    		game.keydowns[event.key] = true
+    	})
+
+    	// move paddle
+    	window.addEventListener('keyup', (event) => {
+    		
+    		game.keydowns[event.key] = false
+    	})
+
+    	game.registration = function(key, callback) {
+    		game.actions[key] = callback
+    	}
+
+    	game.registration('a', function() {
+    		paddle.moveLeft()
+    	})
+
+		game.registration('d', function() {
+    		paddle.moveRight()
+    	})    	
+
+
+    	setInterval(function() {
+    		// log(game)
+    		var actions = Object.keys(game.actions)
+
+    		for (var i = actions.length - 1; i >= 0; i--) {
+    			     				
+    			var key = actions[i]
+
+    			if (game.keydowns[i]) {
+    				game.actions[key]()
+    				log(game)
+    			}
+    		}
+
+    		context.clearRect(0, 0, canvas.width, canvas.height)
+    		context.drawImage(paddle_img, paddle.x, paddle.y, paddle.width, paddle.height)
+
+    	}, 1000/30)
+
+
+    }
+
+    __main()
 </script>
 </body>
 
