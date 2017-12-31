@@ -1,12 +1,17 @@
 # advanced-programming-styles
 
 ## Game 1 - Paddle and ball
-1. 前端搜索原生库应加关键词 MDN
-2. 程序理应有且仅有一个入口，应使用醒目的命名格式来突出主函数的特殊性
-3. 表示相应动作的函数命名规范应由动词开头；如果函数返回的是对象，那么命名应以对象开头接着来源
-4. 对象不能在主函数中暴露任何细节
-5. js中对象作用域应用var，不能采用let const
-6. 封装对象过程中，为了确保一致性应该在每一行后面加逗号
-7. ES6规定js每行代码不应该加分号，简洁
-8. {不应该单独占一行，且其前面应该有个空格
-9. for if 后应该有一个空格 
+1. The information on web development could be searched with the keyword "MDN" in the very beginning.
+2. The program should be separated into a number of functions, and have only one entrance, main function, which should be named in a distinct format, like `__main()`.
+3. The function designed for actions should be named with verbs in the very beginning. If the function returns an object, its name should begin with the name of object.
+4. The objects must not reveal any detail in the main function. The details should be warppered by methods.
+5. In js, the object's effect scope should be defined in 'var' rather than 'let const'.
+6. When defining a json object or dictionaries, each line, especially the last line, should end with a ',' for consistency.
+7. ES6 claims each line in js cannot contain ';' in the end.
+8. Anonymous functions should be defined exactly in the format like this, 
+
+	
+	var a = function() {
+
+	} 
+9. Enter a space char in `for` and `if`
