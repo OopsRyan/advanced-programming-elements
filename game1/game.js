@@ -14,11 +14,25 @@ var Game = function() {
 	game.drawImage = function(o) {
 		game.context.drawImage(o.image, o.x, o.y, o.width, o.height)
 	}	  	
-		
-		// events
-		window.addEventListener('keydown', (event) => {
 
-		game.keydowns[event.key] = true
+    game.createBlocks = function(level) {
+        
+        var blocks = []
+        for (var i = level.length - 1; i >= 0; i--) {
+            blocks.push(Block(level[i]))
+        }
+        return blocks
+    }
+
+    // events
+    window.addEventListener('keydown', (event) => {
+		
+        if ("012".includes(event.key)) {
+            window.blocks = game.createBlocks(levels[Number(event.key)])
+        }else {
+            game.keydowns[event.key] = true    
+        }
+        
 	})
 
 	window.addEventListener('keyup', (event) => {
@@ -30,25 +44,29 @@ var Game = function() {
 		game.actions[key] = callback
 	}
 
-	setInterval(function() {
+    var runLoop = function() {
+        var actions = Object.keys(game.actions)
+        for (var i = actions.length - 1; i >= 0; i--) {
+            var key = actions[i]
+            if (game.keydowns[key]) {
+                // when the key is pressed, call its action
+                game.actions[key]()
+            }
+        }
 
-		var actions = Object.keys(game.actions)
+        game.update()
+        context.clearRect(0, 0, canvas.width, canvas.height)
+        game.draw()
 
-		for (var i = actions.length - 1; i >= 0; i--) {
-			     				
-			var key = actions[i]
+        setTimeout(function() {
+        runLoop()
+        }, 1000/window.fps)
+    }
 
-			if (game.keydowns[key]) {
-				// when the key is pressed, call its action
-				game.actions[key]()
-			}
-		}
 
-		game.update()
-		context.clearRect(0, 0, canvas.width, canvas.height)
-		game.draw()
-
-	}, 1000/30)
+	setTimeout(function() {
+		runLoop()
+	}, 1000/window.fps)
 
 	return game
 }

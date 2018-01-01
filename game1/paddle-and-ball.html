@@ -14,25 +14,27 @@
     <script src="game.js"></script>
     <script src="block.js"></script>
     <script src="levels.js"></script>
+    <script src="utilities.js"></script>
 </head>
 
 <body>
     <canvas id="id-canvas" width="500" height="400"></canvas>
+    <hr>
+    <input id="id-input-speed" type="range" value="1">
 <script>
-	// wrap console.log for convenience
-    var log = console.log.bind(console)
-
-    var imageFromPath = function(path){
-    	var img = new Image()
-    	img.src = path
-    	return img
-    }
 
     var __main = function() {
+        window.fps = 60
+        window.pause = false
+
+        enableDebugMode(true)
+
     	var game = Game()
 
 		var paddle = Paddle()
     	var ball = Ball()
+
+        window.blocks = game.createBlocks(levels[0])
 
     	game.registration('a', function() {
     		paddle.moveLeft()
@@ -46,18 +48,41 @@
     		ball.fire()
     	})
 
-    	game.update = function() {
-    		ball.move()
+        game.registration('p', function() {
+            window.pause = !window.pause
+            log(window.pause)
+        })
 
-    		if (ball.collide(paddle)) {
-    			ball.ySpeed *= -1
-    		}
+    	game.update = function() {
+
+            if (window.pause){
+                return
+            }
+
+            ball.move()
+
+            if (ball.collide(paddle)) {
+                ball.ySpeed *= -1
+            }
+
+            for (var i = blocks.length - 1; i >= 0; i--) {
+                if (blocks[i].collide(ball)) {
+                    blocks[i].kill()
+                    ball.ySpeed *= -1
+                }
+            }
     	}
 		
 		// draw the paddle and the ball
 		game.draw = function() {
 			game.drawImage(paddle)
 			game.drawImage(ball)
+
+            for (var i = blocks.length - 1; i >= 0; i--) {
+                if (blocks[i].lives >= 1) {
+                    game.drawImage(blocks[i])        
+                }
+            }
 		}
     }
 
