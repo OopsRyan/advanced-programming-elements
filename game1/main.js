@@ -2,7 +2,7 @@
 var __main = function() {
     window.fps = 60
     window.pause = false
-
+    var score = 0;
     // in utilies, for debug
     enableDebugMode(true)
 
@@ -46,6 +46,7 @@ var __main = function() {
             if (blocks[i].collide(ball)) {
                 blocks[i].kill()
                 ball.ySpeed *= -1
+                score += 100
             }
         }
 	}
@@ -60,7 +61,11 @@ var __main = function() {
                 game.drawImage(blocks[i])        
             }
         }
+        game.context.font = '15px serif';
+        game.context.fillText('Score: '+score, 20, 380);
 	}
+
+    game.run()
 }
 
 __main()

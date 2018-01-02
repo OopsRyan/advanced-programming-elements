@@ -63,10 +63,11 @@ var Game = function() {
         }, 1000/window.fps)
     }
 
-
-	setTimeout(function() {
-		runLoop()
-	}, 1000/window.fps)
+    game.run = function() {
+        setTimeout(function() {
+            runLoop()
+        }, 1000/window.fps)
+    }
 
 	return game
 }
