@@ -27,7 +27,6 @@ var __main = function() {
 
     game.registration('p', function() {
         window.pause = !window.pause
-        log(window.pause)
     })
 
 	game.update = function() {
@@ -50,9 +49,17 @@ var __main = function() {
             }
         }
 	}
-	
+
 	// draw the paddle and the ball
 	game.draw = function() {
+
+        // var img = new Image()
+        // img.src = "background.png"
+        // game.context.drawImage(img, 0, 0, 500, 500)
+
+        game.context.fillStyle = "#9ACD32"
+        game.context.fillRect(0, 0, 500, 500)
+
 		game.drawImage(paddle)
 		game.drawImage(ball)
 

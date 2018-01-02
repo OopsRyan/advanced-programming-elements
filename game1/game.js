@@ -13,7 +13,7 @@ var Game = function() {
 
 	game.drawImage = function(o) {
 		game.context.drawImage(o.image, o.x, o.y, o.width, o.height)
-	}	  	
+	}
 
     game.createBlocks = function(level) {
         

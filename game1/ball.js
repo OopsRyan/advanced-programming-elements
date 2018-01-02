@@ -1,16 +1,16 @@
 
 var Ball = function() {
-	var image = imageFromPath('ball.png')
+	var img = imageFromPath('ball.png')
 	var canvas = document.querySelector('#id-canvas')
 
 	var o = {
-		image: image,
+		image: img,
 		xSpeed: 10,
 		ySpeed: 10,
 		x:100,
 		y:320,
-		width: 30,
-		height: 30,
+		width: 10,
+		height: 10,
 		fired: false,
 		max_width: canvas.width,
 		max_height: canvas.height,

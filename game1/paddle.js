@@ -7,8 +7,8 @@ var Paddle = function() {
 		speed: 10,
 		x: 100,
 		y: 320,
-		width: 200,
-		height: 30,
+		width: 64,
+		height: 16,
 	}
 
     // for cut-off status, change first, and then check if it makes sense.
