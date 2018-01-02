@@ -30,3 +30,16 @@ var enableDebugMode = function(enable) {
 
 	})
 }
+
+// detect if two rectangles intersect
+// a is the object that always moves
+// b is the object that always be still
+var rectIntersect = function(still_object, moving_object) {
+	var o = still_object
+	var b = moving_object
+	if ((b.y+b.height >= o.y && b.y <= o.y+o.height) && (b.x+b.width >= o.x && b.x <= o.x+o.width)) {
+		return true
+	} else {
+		return false	
+	}
+}

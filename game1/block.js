@@ -29,14 +29,7 @@ var Block = function(position) {
 			return false
 		}
 		// predicate if the ball hits the top and bottom bandary of the block
-		if ((b.y+b.height >= o.y && b.y <= o.y+o.height) && (b.x+b.width >= o.x && b.x <= o.x+o.width)) {
-			return true
-		// } else if ()
-		// 	// predicate if the ball hits the left and right bandary of the block
-		// 	return true
-		} else {
-			return false	
-		}
+		return rectIntersect(o, ball)
 	}
 
 	return o

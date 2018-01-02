@@ -37,10 +37,7 @@ var Ball = function() {
 
 	o.collide = function(paddle) {
 		
-		if (o.y + o.height >= paddle.y && (o.x >= paddle.x && o.x <= paddle.x + paddle.width))
-			return true
-
-		return false
+		return rectIntersect(paddle, o)
 	}
 
 	return o
