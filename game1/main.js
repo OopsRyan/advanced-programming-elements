@@ -68,8 +68,8 @@ var __main = function() {
                 game.drawImage(blocks[i])        
             }
         }
-        game.context.font = '15px serif';
-        game.context.fillText('Score: '+score, 20, 380);
+
+        game.context.fillText('Score: '+score, 100, 380);
 	}
 
     game.run()
