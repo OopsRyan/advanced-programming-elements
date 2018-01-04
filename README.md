@@ -21,4 +21,4 @@
 13. One of JS's shortcomings is asynchronous loading all images.
 14. When writing if statement, the body of statement should not be too long, so usually write the oppsite predicate and return the function to avoid the orignial predicate containing a long body statment.
 
-<img src="https://github.com/OopsRyan/advanced-programming-styles/blob/master/game1/game1_demo.gif" width="200" height="200"/>
+<img src="https://github.com/OopsRyan/advanced-programming-styles/blob/master/game1/materials/game1_demo.gif" width="200" height="200"/>
