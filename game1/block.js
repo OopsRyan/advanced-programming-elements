@@ -3,7 +3,7 @@ var Block = function(position) {
 	
 	// position is an array with the format [0,0,]
 
-	var img = imageFromPath('block.png')
+	var img = imageFromPath('./materials/block.png')
 
 	// each function is a individual chunck. 
 	// I dont like to use variables with a long name, so I define a temp 'p' to take 'position'

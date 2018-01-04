@@ -1,6 +1,6 @@
 
 var Ball = function() {
-	var img = imageFromPath('ball.png')
+	var img = imageFromPath('./materials/ball.png')
 	var canvas = document.querySelector('#id-canvas')
 
 	var o = {
