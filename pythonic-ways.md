@@ -85,3 +85,42 @@ This problem also exists for reading data from files. The solution is the same: 
 	green = get_first_int(my_values, 'green')
 
 As soon as your expressions get complicated, it's time to consider splitting them into smaller pieces and moving logic into helper functions. What you gain in readability always outweighs what brevity may have afforded you.
+
+### Slice Sequences
+`somelist[start:end]`, where `start` is inclusive and `end` is exclusinve
+
+Slicing deals properly with `start` and `end` indexes that are beyond the boundaries of the list. That makes it easy for your code to establish a maximum length to consider for an input sequence.
+
+	first_tweenty_items = a[:20]
+	last_tweenty_items = a[-20:]
+
+The result of slicing a list is a whole new list. References to the objects from the orignial list are maintained. Modifying the result of slicing won't affect the original list.
+
+`somelist[start:end:stride]`. take every *n*th item when slicing a sequence. For example, the stride makes it easy to group by even and odd indexes in a list.
+
+`::2` means select every second item starting at the beginning.
+`::-2` means select every second item starting at the end and moving backwards.
+
+Specifying `start`, `end`, and `stride` in a slice can be extremely confusing.
+Prefer using positive `stride` values in slices without `start` or `end` indexes.
+Avoiding using `start`, `end`, and `stride` together in a single slice. If you need all three parameters, consider doing two assignments (one to slice, another to stride)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
