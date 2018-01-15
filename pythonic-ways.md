@@ -105,10 +105,81 @@ Specifying `start`, `end`, and `stride` in a slice can be extremely confusing.
 Prefer using positive `stride` values in slices without `start` or `end` indexes.
 Avoiding using `start`, `end`, and `stride` together in a single slice. If you need all three parameters, consider doing two assignments (one to slice, another to stride)
 
+### Avoid More Than Two Expressions in List Comprehensions
+	squared = [[x**2 for x in row] for row in matrix]
+	print(squared)
+	>>>
+	[[1, 4, 9], [16, 25, 36], [49, 64, 81]]
 
+The rule of thumb is to avoid using more than two expressions in a list comprehension. This could be two conditions, two loops, or one condition and one loop.
 
+### Consider Generator Expressions for Large Comprehensions
+For example, say you want to read a file and return the number of characters on each line. Doing this with a list comprehension would require holding the length of every line of the file in memory. If the file is absolutely enormous or perhaps a never-ending network socket, list comprehension are problematic.
+To solve this, Python provides `generator` expressions, a generalization of list comprehensions and generators. 
+Syntax between `()`
 
+	it = (len(x) for x in open('/tmp/my_file.txt'))
 
+The returned iterator can be advanced one step at a time to produce the next output from the generator expression as needed (using the next built-in function)
+
+	print(next(it))
+	>>>
+	100
+
+When you are looking for a way to compose functionality that's operating on a large stream of input, generator expressions are the best tool for the job. The only gotcha is that the iterators returned by generator expressions are stateful.
+
+### Prefer enumerate Over range
+
+The range built-in function is useful for loops that iterate over a set of integers.
+	
+	# using range to get index of list is hard to read.
+	flavor_list = ['vanilla', 'chocolate', 'pecan', 'strawberry']
+	for i in range(len(flavor_list)):
+		flavor = flavor_list[i]
+		print('%d: %s' % (i + 1, flavor))
+
+The `enumerate` built-in function for addressing this situation. `enumerate` wraps any iterator with a lazy generator. This generator yields pairs of the loop index and the next value from the iterator.
+	
+	for i, flavor in enumerate(flavor_list):
+		print('%d: %s' % (i + 1, flavor))
+
+	>>>
+	1: vanilla
+	2: chocolate
+	3: pecan
+	4: strawberry
+
+You can make this even shorter by specifying the number from which `enumerate` should begin counting (1 in this case).
+
+	for i, flavor in enumerate(flavor_list, 1):
+		print('%d: %s' % (i + 1, flavor))
+
+### Use zip to Process Iterators in Parallel
+	names = ['Cecilia', 'Lise', 'Marie']
+	letters = [len(n) for n in names]
+
+The items in the derived list are related to the items in the source list by their indexes.
+
+`zip` built-in function wraps two or more iterators with a lazy generator. 
+	
+	longest_name = None
+	max_letters = 0
+	for name, count in zip(names, letters):
+		if count > max_letters:
+			longest_name = name
+			max_letters = count
+
+But `zip` behaves strangely if the input iterators are of different lengths.
+	
+	names.append('Rosalind')
+	for name, count in zip(names, letters):
+		print(name)
+	>>>
+	Cecilia
+	Lise
+	Marie
+
+It keeps yielding tuples until a wrapped iterator is exhausted.
 
 
 
