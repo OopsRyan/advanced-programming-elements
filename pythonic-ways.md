@@ -229,7 +229,9 @@ Use `try/except/else/finally` when you want to do it all in one compound stateme
 
 This layout is especially useful because all of the blocks work together in intuitive ways. For example, if an exception gets raised in the `else` block while rewriting the result data, the `finally` block will still run and close the file handle.
 
-
+1. The `try/finally` compound statement lets you run **cleanup** code regardless of whether exceptions were raised in the `try` block.
+2. The `else` block helps you *minimize the amount of code in `try` blocks* and *visually distinguish the success case* from the `try/except` blocks.
+3. An `else` block can be used to perform additional actions after a successful `try` block but before common cleanup in a `finally`blcok.
 
 
 
